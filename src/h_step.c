@@ -45,7 +45,7 @@ extern int phase_times[];
 #endif
 
 
-inline int h_mpi_parse(int argc, char **argv,
+int h_mpi_parse(int argc, char **argv,
 		int *tool_rank, int *tool_size,
 		char *cmd_name, int *tool_info)
 {
@@ -84,7 +84,7 @@ inline int h_mpi_parse(int argc, char **argv,
 }
 
 
-inline int h_mpi_init(int argc, char **argv,
+int h_mpi_init(int argc, char **argv,
 		int *tool_rank, int *tool_size,
 		int *tool_info, char *cmd_name)
 {
@@ -522,7 +522,7 @@ int h_report(int tool_rank, int *tool_info,
 
 
 
-inline void h_get_root_other_color (int tool_rank,
+void h_get_root_other_color (int tool_rank,
 		int tool_rank_new, int tool_size_new,
 		MPI_Comm this_comm, int *root_other_color) {
 

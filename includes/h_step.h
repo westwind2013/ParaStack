@@ -15,7 +15,7 @@
 // description:	parse the input from command line
 // input:		argc, argv
 // output:		cmd_name, file_name
-inline int h_mpi_parse(int argc, char **argv,
+int h_mpi_parse(int argc, char **argv,
 		int *tool_rank, int *tool_size,
 		char *cmd_name, int *tool_info);
 
@@ -24,7 +24,7 @@ inline int h_mpi_parse(int argc, char **argv,
 // 				information of the target processes.
 // input: 		argc, argv
 // output: 		tool_rank, tool_size, tool_info, cmd_name
-inline int h_mpi_init(int argc, char **argv,
+int h_mpi_init(int argc, char **argv,
 		int *tool_rank, int *tool_size,
 		int *tool_info, char *cmd_name);
 
@@ -62,7 +62,7 @@ int h_report_multi_backtrace(int tool_rank, int* tool_info,
 // input:		tool_rank, tool_rank_new, tool_size_new,
 //				this_comm
 // output:		root_other_color
-inline void h_get_root_other_color (int tool_rank,
+void h_get_root_other_color (int tool_rank,
 		int tool_rank_new, int tool_size_new,
 		MPI_Comm this_comm, int *root_other_color);
 

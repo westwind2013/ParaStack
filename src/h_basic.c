@@ -7,11 +7,11 @@
 char cmp[CMP_LEN] = "MPI_";
 char _cmp[CMP_LEN] = "mpi_";
 
-inline void h_msleep(unsigned int msecs) {
+void h_msleep(unsigned int msecs) {
 	usleep(msecs * 1000);
 }
 
-inline int h_check_start_string(char *frame_name) {
+int h_check_start_string(char *frame_name) {
 	int i = 0;
 
 	// check if the frame_name contains keywords "MPI"
@@ -40,7 +40,7 @@ inline int h_check_start_string(char *frame_name) {
 }
 
 
-inline int h_check_string(char *frame_name) {
+int h_check_string(char *frame_name) {
 	int i = 0, j = 0;
 
 	// check if the frame_name contains keywords "MPI"
@@ -66,7 +66,7 @@ inline int h_check_string(char *frame_name) {
 }
 
 
-inline void h_generate_rand_list(int max_rand, int num, int *rand_list) {
+void h_generate_rand_list(int max_rand, int num, int *rand_list) {
 
 	int i, j;
 	int temp;
@@ -110,7 +110,7 @@ inline void h_generate_rand_list(int max_rand, int num, int *rand_list) {
 	h_bubble_sort(rand_list, num);
 }
 
-inline void h_bubble_sort(int *rand_list, int num) {
+void h_bubble_sort(int *rand_list, int num) {
 
 	int i, j;
 	int temp;
@@ -128,7 +128,7 @@ inline void h_bubble_sort(int *rand_list, int num) {
 }
 
 
-inline void h_check(int tool_rank, int *array, int num) {
+void h_check(int tool_rank, int *array, int num) {
 
 	// index
 	int j;
@@ -145,7 +145,7 @@ inline void h_check(int tool_rank, int *array, int num) {
 }
 
 
-inline void h_check_target(int tool_rank, H_TARGET *array, int num) {
+void h_check_target(int tool_rank, H_TARGET *array, int num) {
 
 	// index
 	int j;
@@ -161,7 +161,7 @@ inline void h_check_target(int tool_rank, H_TARGET *array, int num) {
 }
 
 
-inline void h_claim_start (int tool_rank) {
+void h_claim_start (int tool_rank) {
 
 	if (tool_rank == 0) {
 		printf("\n*********************************\n");
@@ -171,7 +171,7 @@ inline void h_claim_start (int tool_rank) {
 
 }
 
-inline void h_claim_exit (int tool_rank, int check_ret) {
+void h_claim_exit (int tool_rank, int check_ret) {
 
 	MPI_Barrier(MPI_COMM_WORLD);
 
@@ -187,7 +187,7 @@ inline void h_claim_exit (int tool_rank, int check_ret) {
 	}
 }
 
-inline void h_claim_rand_info (int tool_rank, int tool_size,
+void h_claim_rand_info (int tool_rank, int tool_size,
 		int *tool_info, int *local_rand_num,
 		H_TARGET local_rand_tasks[][RAND_TASKS_NUM/2]) {
 
