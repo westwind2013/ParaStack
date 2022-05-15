@@ -61,7 +61,7 @@ void h_claim_exit (int tool_rank, int check_ret);
 // 				local_rand_num, local_rand_tasks
 // output:
 void h_claim_rand_info (int tool_rank, int tool_size,
-		int *tool_info, int *local_rand_num,
-		H_TARGET local_rand_tasks[][RAND_TASKS_NUM/2]);
+    int *tool_info, int *local_rand_num,
+    H_TARGET local_rand_tasks[][RAND_TASKS_NUM/2]);
 
 #endif  // H_BASIC_H
