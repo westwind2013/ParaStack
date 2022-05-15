@@ -1,0 +1,37 @@
+#!/bin/bash 
+
+#SBATCH -J stackJob 
+#SBATCH -o stackJob.result/stackJob.%j.out 
+#SBATCH -p H_WHICH_QUEUE 
+#SBATCH -N H_NUM_NODES 
+#SBATCH -n H_NUM_TASKS
+#SBATCH -t 00:20:00 
+#SBATCH --exclusive 
+#SBATCH -A TG-EAR130035 
+
+ibrun -n R_NUM_TASKS -o 0 H_FULL_COMMAND_NAME  & 
+
+ANA_FILE=stackJob.result/stackJob.$SLURM_JOB_ID.ana
+TASKS_PER_NODE=$SLURM_TASKS_PER_NODE
+echo -e "SLURM_TASKS_PER_NODE @TARGET: $TASKS_PER_NODE" > $ANA_FILE 
+
+TARGET_NUM_NODES=0
+TASKS_PER_NODE=$(echo $TASKS_PER_NODE | awk 'BEGIN {FS="("} {print $1}')
+if [[ $((R_NUM_TASKS / TASKS_PER_NODE)) -lt $SLURM_JOB_NUM_NODES ]]; then
+	TARGET_NUM_NODES=$((R_NUM_TASKS / TASKS_PER_NODE))
+	if [[ $((R_NUM_TASKS % TASKS_PER_NODE)) -gt 0 ]]; then
+		TARGET_NUM_NODES=$((TARGET_NUM_NODES + 1))
+	fi
+else
+	TARGET_NUM_NODES=$SLURM_JOB_NUM_NODES 
+fi
+
+echo -e "                              $TASKS_PER_NODE" >> $ANA_FILE 
+echo -e "SLURM_JOB_NUM_NODES @TARGET:  $TARGET_NUM_NODES" >> $ANA_FILE 
+
+SLURM_TASKS_PER_NODE="1(x$TARGET_NUM_NODES)" 
+echo -e "SLURM_TASKS_PER_NODE @TOOL:  $SLURM_TASKS_PER_NODE" >> $ANA_FILE 
+
+ibrun -n $TARGET_NUM_NODES -o 0 stack -n R_NUM_TASKS -p $TASKS_PER_NODE -c "H_COMMAND_NAME" >> $ANA_FILE 2>> $ANA_FILE.err  & 
+
+wait
