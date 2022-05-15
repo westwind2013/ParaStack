@@ -1,4 +1,4 @@
-CC 				:= mpicc
+CC := mpicc
 
 SRC_PATH := src
 INC_PATH := includes
@@ -16,7 +16,14 @@ LDFLAGS := -L ${LIBUNWIND_LIB_PATH} -lunwind-x86_64 -lunwind-ptrace -lm
 
 TARGET := stack
 
-all: ${BIN_PATH}/${TARGET} 
+MKDIR_P := mkdir -p
+
+.PHONY: directories
+directories: 
+	@${MKDIR_P} ${OBJ_PATH}
+	@${MKDIR_P} ${BIN_PATH}
+
+all: directories ${BIN_PATH}/${TARGET} 
 
 ${BIN_PATH}/${TARGET}: ${OBJECTS} 
 	@$(CC) -o $@ $^ -O3 $(LDFLAGS) 
@@ -29,8 +36,7 @@ $(OBJECTS): ${OBJ_PATH}/%.o : ${SRC_PATH}/%.c
 .PHONY: clean
 clean:
 	@echo ${OBJECTS}
-	@rm ${OBJECTS}
-	@rm ${BIN_PATH}/${TARGET}
+	@rm ${OBJECTS} ${BIN_PATH}/${TARGET}
 	@echo "Cleanup complete!"
 
 # TODO: Refactor the following makefile rules.
