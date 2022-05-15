@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#PBS -l nodes=2:ppn=32,walltime=06:00:00
+
+export MODULEPATH=$MODULEPATH:/home/hli035/success/modulefiles
+module initlist
+module purge
+
+module load cmake
+module load gcc-4.7.2
+module load mvapich2-2.0
+module load cblas
+module load automaded
+
+cd /home/hli035/success/workspace/stack.1.0.full/test/wrong
+
+LD_PRELOAD=/home/hli035/success/APPS/automaded/lib/libstracker.so:/act/gcc-4.7.2/lib64/libstdc++.so mpirun ./helloworld

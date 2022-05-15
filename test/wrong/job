@@ -1,0 +1,29 @@
+#!/bin/bash
+#----------------------------------------------------
+# Example SLURM job script to run MPI applications on 
+# TACC's Stampede system.
+#
+# $Id: job.mpi 1580 2013-01-08 04:10:50Z karl $
+#----------------------------------------------------
+
+#SBATCH -J hongboMPI              # Job name
+#SBATCH -o hongbo.%j.out      # Name of stdout output file (%j expands to jobId)
+#SBATCH -p normal			  # Queue name
+#SBATCH -N 100                  # Total number of nodes requested (16 cores/node)
+#SBATCH -n 1600                 # Total number of mpi tasks requested
+#SBATCH -t 01:30:00           # Run time (hh:mm:ss) - 1.5 hours
+#SBATCH -A TG-EAR130035       # <-- Allocation name to charge job against
+
+# Launch the MPI executable named "a.out"
+ibrun ./hello1 &
+
+ANA_FILE=hongbo.$SLURM_JOBID.ana
+TASKS_PER_NODE=$SLURM_TASKS_PER_NODE
+TARGET_NUM_NODES=$SLURM_JOB_NUM_NODES
+echo -e "SLURM_TASKS_PER_NODE @TARGET: $TASKS_PER_NODE" > $ANA_FILE
+echo -e "SLURM_JOB_NUM_NODES @TARGET:  $TARGET_NUM_NODES" >> $ANA_FILE 
+
+export SLURM_TASKS_PER_NODE="1(x$TARGET_NUM_NODES)"
+echo -e "SLURM_TASKS_PER_NODE @TOOL:  $SLURM_TASKS_PER_NODE" >> $ANA_FILE
+ibrun -n $TARGET_NUM_NODES -o 0 stack -c hello1 -n $TASKS_PER_NODE &>> $ANA_FILE  & 
+wait
