@@ -7,9 +7,9 @@
 #include <math.h>
 #include <time.h>
 
-#include "h_common.h"
-#include "h_unwind.h"
-#include "h_basic.h"
+#include "common.h"
+#include "unwind.h"
+#include "basic.h"
 
 // 0.function:
 // description:	parse the input from command line

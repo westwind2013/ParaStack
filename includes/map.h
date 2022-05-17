@@ -2,7 +2,7 @@
 
 #define H_MAP_H
 
-#include "h_common.h"
+#include "common.h"
 
 // 0. function:
 // description:	correspond mpi rank to process id

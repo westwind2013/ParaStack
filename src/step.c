@@ -1,5 +1,5 @@
-#include "h_step.h"
-#include "h_qnorm.h"
+#include "step.h"
+#include "qnorm.h"
 
 // tolerant false probability
 const double false_prob = 0.001;

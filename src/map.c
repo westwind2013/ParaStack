@@ -1,4 +1,4 @@
-#include "h_map.h"
+#include "map.h"
 
 void h_map(int target_num, int rank_base, H_TARGET *target_list) {
 

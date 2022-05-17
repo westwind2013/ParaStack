@@ -1,5 +1,5 @@
-#include "h_common.h"
-#include "h_step.h"
+#include "common.h"
+#include "step.h"
 
 #ifdef PHASE_DETECTION
 // the default phase id is 0

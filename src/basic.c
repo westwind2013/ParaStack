@@ -1,4 +1,4 @@
-#include "h_basic.h"
+#include "basic.h"
 
 // the length of substring needs to be searched
 #define CMP_LEN 4

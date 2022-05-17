@@ -35,7 +35,6 @@ $(OBJECTS): ${OBJ_PATH}/%.o : ${SRC_PATH}/%.c
 
 .PHONY: clean
 clean:
-	@echo ${OBJECTS}
 	@rm ${OBJECTS} ${BIN_PATH}/${TARGET}
 	@echo "Cleanup complete!"
 

@@ -8,8 +8,8 @@
 #include <sys/ptrace.h>
 #include <sys/wait.h>
 
-#include "h_common.h"
-#include "h_basic.h"
+#include "common.h"
+#include "basic.h"
 
 // 0. function:
 // description:	search for all targets processes

@@ -4,7 +4,7 @@
 
 #include <unistd.h>
 
-#include "h_common.h"
+#include "common.h"
 
 // 0. function:
 // description:	sleep for milliseconds
